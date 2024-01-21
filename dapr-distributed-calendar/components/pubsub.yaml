@@ -1,12 +1,19 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: pubsub
+  name: mqtt-pubsub
 spec:
-  type: pubsub.redis
+  type: pubsub.mqtt3
   version: v1
   metadata:
-  - name: redisHost
-    value: localhost:6379
-  - name: redisPassword
-    value: ""
+    - name: url
+      value: "tcp://jhpark:jhpark@172.18.255.201:1883"
+    # Optional
+    - name: retain
+      value: "false"
+    - name: cleanSession
+      value: "false"
+    - name: qos
+      value: "1"
+    - name: consumerID
+      value: "channel1"

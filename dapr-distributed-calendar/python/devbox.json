@@ -1,0 +1,27 @@
+{
+  "packages": [
+    "direnv",
+    "python@3.12",
+    "black@latest",
+    "poetry@latest",
+    "github:NixOS/nixpkgs/nixos-23.05#stdenv.cc.cc.lib"
+  ],
+  "env": {
+    "PYTHON_KEYRING_BACKEND": "keyring.backends.null.Keyring"
+  },
+  "shell": {
+    "init_hook": [
+      "echo $VENV_DIR",
+      ". $VENV_DIR/bin/activate",
+      "poetry add python-lsp-server",
+      "poetry add pyright",
+      "poetry add pylyzer",
+      "poetry install --no-root",
+      "poetry shell"
+    ],
+    "scripts": {
+      "run_test": "poetry run python -m poetry_demo",
+      "test": "poetry run pytest"
+    }
+  }
+}
